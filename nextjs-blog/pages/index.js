@@ -1,6 +1,8 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import Counter from '../components/Counter';
+import GitHub from '../components/GitHub';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -13,7 +15,29 @@ export default function Home() {
       <h1 className={styles.title}>
         Victor Becker welcomes <a href="https://nextjs.org">Next.js!</a>
       </h1>
-      <Counter />
+      <Counter name={"Chaos"} mult={1} size={2}/>
+      <Counter name={"Big E"} mult={2} size={0.5}/>
+
+      <hr 
+        style={{
+          width: "80%",
+          marginTop: "lem",
+        }}
+      />
+      <GitHub />
+      <hr 
+        style={{
+          width: "80%",
+          marginTop: "lem",
+        }}
+      />
+      <p>Check out this <link href="/store">Scam Store</link></p>
+      <hr 
+        style={{
+          width: "80%",
+          marginTop: "lem",
+        }}
+      />
     </div>
   );
 }
