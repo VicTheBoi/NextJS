@@ -31,7 +31,7 @@ export default function Home() {
           marginTop: "lem",
         }}
       />
-      <p>Check out this <link href="/store">Scam Store</link></p>
+      <p>Check out this <Link href="/store">Scam Store</Link></p>
       <hr 
         style={{
           width: "80%",

@@ -1,30 +1,30 @@
-import React, {useState} from "react";
-import styles from '../styles/Home.module.css';
+import {useState , useEffect} from "react";
 
-const SearchBar = (props) => {
-    const [searchValue, setSearchValue] = useState("")
-    const handleInputChange = (event) => {
-        setSearchValue(event.target.value)
+export default function SearchBar() {
+    const [filteredProducts, setFilteredProducts] = useState([])
+    const [searchString, setSearchString] = useState("")
+    useEffect(fetchAPIData, [searchString])
+    function fetchAPIData(){
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(products => {
+                const filtered = products.filter((el) => {return el.title.toLowerCase().includes(searchString.toLowerCase())})
+                const currentFilter = filtered.map((product, index) => {
+                    return (<div className="prodStyle" key={index}>
+                        <p style={{fontSize:"2rem", textAlign:"center"}}>${product.price}</p>
+                        <img style={{width:"50px", display:"block", margin:"auto"}} src={product.image} alt={product.title} />
+                        <p style={{fontSize:"1rem"}}>{product.title}</p>
+                    </div>)
+                })
+                setFilteredProducts(currentFilter)
+            })
     }
-    const handleClearClick = () => {
-        setSearchValue("")
+    function handleChnage(event){
+        setSearchString(event.target.value)
     }
-    const filteredProducts = props.products.filter((product) => {
-        return product.includes(searchValue)
-    })
-    const shouldDisplayButton = searchValue.length > 0
-    return (
-        <div>
-            <input type="text" value={searchValue} onChange={handleInputChange} />
-            {shouldDisplayButton && <button onClick={handleClearClick}>clear</button>}
-
-            <ul>
-            {filteredproducts.map((product) => {
-                return <li key={product}>{product}</li>
-            })}
-            </ul>
-        </div>
-    )
+    return <div>
+        <p>The Search Bar!</p>
+        <input type="text" value={searchString} onChange={handleChnage} />
+        <div style={{display:"flex", flexFlow:"row wrap"}}>{filteredProducts}</div>
+    </div>
 }
-
-export default SearchBar
